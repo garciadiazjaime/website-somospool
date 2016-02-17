@@ -1,0 +1,43 @@
+@font-face {
+  font-family: montserrat;
+  src: url(/fonts/montserrat/montserrat-regular.ttf);
+}
+@font-face {
+  font-family: montserrat-bold;
+  src: url(/fonts/montserrat/montserrat-bold.ttf);
+}
+
+@font-face {
+  font-family: nunito;
+  src: url(/fonts/nunito/nunito-regular.ttf);
+}
+@font-face {
+  font-family: nunito-bold;
+  src: url(/fonts/nunito/nunito-bold.ttf);
+}
+@font-face {
+  font-family: nunito-light;
+  src: url(/fonts/nunito/nunito-light.ttf);
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+      width: 1024px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .container {
+      width: 768px;
+  }
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+*:focus {outline:0px none transparent;}
+
+div{
+  /*border: 1px solid black;*/
+}
