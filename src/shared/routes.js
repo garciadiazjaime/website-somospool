@@ -17,7 +17,7 @@ export default(
       <Route path="portafolio" component={PortfolioSection} />
       <Route path="nosotros" component={AboutSection} />
       <Route path="servicios" component={ServicesSection} />
-      <Route path="contact" component={ContactSection} />
+      <Route path="contacto" component={ContactSection} />
     </Route>
   </Router>
 );
