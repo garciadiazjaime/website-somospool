@@ -9,8 +9,8 @@ export default class HomeSection extends React.Component {
   render() {
     return (<div>
       <Block1 data={data.block1} />
-      <Block2 />
-      <Block3 />
+      <Block2 data={data.block2} />
+      <Block3 data={data.block3} />
       </div>);
   }
 }
