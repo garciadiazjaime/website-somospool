@@ -1,5 +1,6 @@
 node_modules
 *.DS_Store
-lib/
 bower_components
 npm-debug.log
+dist/server.js
+static/js/app.js

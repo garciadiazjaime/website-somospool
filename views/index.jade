@@ -1,18 +1,20 @@
+doctype html
 html
   head
-    title='Mintsite Child'
+    title='Somos Pool | Tijuana MX'
 
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    link(href='./images/favicon.ico' rel='shortcut icon' type='image/png')
-    link(href='./bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' type='text/css')
-    link(href='./css/screen.css' rel='stylesheet' type='text/css')
+    link(href='/images/favicon.ico' rel='shortcut icon' type='image/png')
+    link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css')
+    link(href='/css/screen.min.css' rel='stylesheet' type='text/css')
   body
     #app!= content
 
-    script(src='./jquery/dist/jquery.min.js', defer)
-    script(src='./bootstrap/dist/js/bootstrap.min.js', defer)
-    script(src='http://localhost:8080/js/app.js', defer)
+    script(src='https://code.jquery.com/jquery-2.2.2.min.js', integrity='sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', defer)
+    script(src='/js/app.min.js', defer)
