@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 
 import config from '../../config';
 import apiRoutes from './helpers/api';
-import routes from '../shared/routes';
+import routes from '../shared/config/routes';
 
 const app = express();
 
@@ -18,8 +18,7 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }));
 
-app.use(express.static('bower_components'));
-app.use(express.static('public'));
+app.use(express.static('static'));
 
 app.use('/api/', apiRoutes);
 
