@@ -15,6 +15,8 @@ export default(
     <Route path="/" component={items.component}>
       <IndexRoute component={items.default} />
       {routes}
+      <Route path="portafolio/:category" component={items.portfolio} />
+      <Route path="portafolio/:project" component={items.portfolio} />
     </Route>
   </Router>
 );

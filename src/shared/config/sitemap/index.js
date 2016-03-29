@@ -10,18 +10,19 @@ export default {
   items: {
     component: AppHandler,
     default: HomeSection,
+    portfolio: PortfolioSection,
     children: [{
       title: 'Inicio',
       url: '/inicio',
       component: HomeSection,
     }, {
-      title: 'Portafolio',
-      url: '/portafolio',
-      component: PortfolioSection,
-    }, {
       title: 'Nosotros',
       url: '/nosotros',
       component: AboutSection,
+    }, {
+      title: 'Portafolio',
+      url: '/portafolio',
+      component: PortfolioSection,
     }, {
       title: 'Servicios',
       url: '/servicios',
