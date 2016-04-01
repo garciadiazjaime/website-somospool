@@ -33,23 +33,25 @@ export default class MainMenu extends React.Component {
     /*eslint-disable */
     return (<nav className={style.navbarDefault + ' navbar navbar-default'} id="menu_wrapper">
             <div className="container-fluid">
-              <div className={style.navbarHeader + ' navbar-header'}>
-                <button type="button" className="navbar-toggle collapsed menu_trigger" data-toggle="collapse" data-target="#mainmenu" aria-expanded="false">
-                  <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                </button>
-                <Link className={style.navbarBrand + ' navbar-brand'} to="/inicio" />
-              </div>
+              <div className="row">
+                <div className={style.navbarHeader + ' navbar-header'}>
+                  <button type="button" className={'navbar-toggle collapsed menu_trigger ' + style.toggleButton} data-toggle="collapse" data-target="#mainmenu" aria-expanded="false">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  <Link className={style.navbarBrand + ' navbar-brand'} to="/inicio" />
+                </div>
 
-              <div className={style.navbarCollapse + ' collapse navbar-collapse'} id='mainmenu'>
-                <ul className={style.socialNetwork}>
-                  {this.getIcons(this.props.icons)}
-                </ul>
-                <ul className={style.navbarNav + ' nav navbar-nav'}>
-                  {this.getItems(this.props.items)}
-                </ul>
+                <div className={style.navbarCollapse + ' collapse navbar-collapse'} id='mainmenu'>
+                  <ul className={style.socialNetwork}>
+                    {this.getIcons(this.props.icons)}
+                  </ul>
+                  <ul className={style.navbarNav + ' nav navbar-nav'}>
+                    {this.getItems(this.props.items)}
+                  </ul>
+                </div>
               </div>
             </div>
         </nav>);

@@ -15,21 +15,32 @@ $height: 75px;
   position: relative;
 }
 .navbarBrand {
+  margin-left: 0!important;
   padding: 0;
-  background-image: url(/images/logo_pool.png);
-  height: 6px;
-  width: 34px;
-  margin-top: 35px;
-  margin-right: 60px;
+  @extend .vCenter;
+  @extend .icon-sprites;
+  @include sprite($sprites-logo_pool);
+  left: 0;
 }
 .toggleButton{
   @extend .vCenter;
   margin: 0;
-  right: 0;
+  right: 15px;
+  border-color: $white!important;
+  .iconBar{
+    background-color: $white!important;
+  }
+  &:hover, &:focus{
+    background-color: lighten($blue, 10%)!important;
+  }
 }
 // ********** Navbar Collapse es la sección que contiene los links que se ocultarán en móvil *********************
 .navbarCollapse{
+  float: right;
   border: none;
+  padding-right: 0;
+  padding-left: 0;
+  background: $blue;
 }
 .navbarNav {
   >li{
@@ -39,58 +50,80 @@ $height: 75px;
 .navbarNavAnchor {
   font-family: 'Open Sans';
   font-weight: 300;
-  @extend .vCenter;
   padding-top: 0!important;
   padding-bottom: 0!important;
   font-size: 14px;
   color: $darkBlue!important;
   text-transform: uppercase;
+  @extend .vCenter;
   &:hover {
     color: $lightBlue!important;
-    background-color: initial;
+    background-color: transparent!important;
   }
 }
-.socialNetwork {
-  margin: 0 -15px;
-  position: relative;
-  float: right;
+.navbarIcons {
+  margin: 0;
+  position: absolute;
+  height: $height;
+  right: 0;
   padding: 0;
   li{
     height: $height;
     position: relative;
-    width: 50px;
     display: inline-block;
     list-style: none;
   }
 }
 .sm_icon {
-  @extend .fCenter;
+  @extend .vCenter;
+  right: 0;
 }
 .facebook {
   @extend .icon-sprites;
-  // @include sprite($sprites-imagen-facebook);
+  @include sprite($sprites-facebook_icon);
   @extend .sm_icon;
 }
 @media#{$isTablet}{
+  .navbarBrand{
+    left: 15px;
+  }
   .navbarNav {
     margin-right: 10px!important;
   }
-  .navbarNavAnchor {
-    padding: 10px 10px!important;
+  .navbarBrand {
+    left: 15px;
+  }
+  .navbarIcons{
+    position: relative;
+    float: right;
   }
 }
 @media#{$isPhone}{
+  .navbarBrand{
+    left: 15px;
+  }
   .navbarCollapse{
-    background: $white;
     position: relative;
     z-index: 1000;
+    float: none;
+    border-bottom: 1px solid $white!important;
+    border-top: 2px solid $white!important;
+    li {
+      height: auto;
+      padding: 15px 0;
+    }
   }
-  .navbarNav, .socialNetwork {
+  .navbarNavAnchor{
+    position: relative;
+    @include transform(translateY(0));
+    top: 0;
+  }
+  .navbarNav {
     float: none!important;
-    margin-left: 35px!important;
-    margin-right: 0!important;
+    margin: 0;
+    position: relative;
   }
-  .navbarBrand{
-    left: 10px;
+  .navbarIcons{
+    display: none;
   }
 }

@@ -21,14 +21,17 @@ export default class PlaceList extends React.Component {
     if (_.isArray(places) && places.length) {
       return places.slice(0, 21).map((item, index) => {
         return (<div className={'col-sm-6 col-xs-12 ' + style.placeCard} key={index}>
-            <img src="/images/placeholder.png" alt={item.title} />
-            <h3 key={index}>
-              {this.getTitle(item, baseUrl)}
-            </h3>
-            <h4>
-              {item.subtitle}
-            </h4>
-            <p>{item.categories.join(' ')}</p>
+            <div className="row">
+              <img src="/images/placeholder.png" alt={item.title} />
+              <div className={style.legend}>
+                <h3 key={index}>
+                  {this.getTitle(item, baseUrl)}
+                </h3>
+                <h4>
+                  {item.subtitle}
+                </h4>
+              </div>
+            </div>
           </div>);
       });
     }
@@ -37,7 +40,7 @@ export default class PlaceList extends React.Component {
 
   render() {
     const { data, baseUrl } = this.props;
-    return (<div className={'row ' + style.container}>
+    return (<div className={'row '}>
       {this.renderItems(data, baseUrl)}
     </div>);
   }

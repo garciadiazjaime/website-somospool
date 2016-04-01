@@ -1,0 +1,33 @@
+$sprites-arrow_green_right: -14px -7px 5px 8px;
+$sprites-facebook_icon: -0px -0px 14px 27px;
+$sprites-logo_pool: -0px -27px 34px 6px;
+$sprites-logo_pool_green: -14px -0px 32px 7px;
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 3);
+}
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 4);
+}
+@function sprite-width($sprite) {
+   @return nth($sprite, 3);
+}
+@function sprite-height($sprite) {
+   @return nth($sprite, 4);
+}
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 1);
+  $sprite-offset-y: nth($sprite, 2);
+  background-position: $sprite-offset-x $sprite-offset-y;
+}
+@mixin sprite($sprite, $display: block) {
+   @include sprite-position($sprite);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: $display;
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+.icon-sprites {
+  background-image: url('/images/sprites/sprite-sprites.png');
+}

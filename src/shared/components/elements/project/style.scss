@@ -1,9 +1,39 @@
 @import '../../../theme/constants';
 
 .container {
-  border: 1px solid gray;
 }
 
 .placeCard {
-  border: 1px dotted blue;
+  position: relative;
+  img{
+    width: 100%;
+  }
+  .legend{
+    font-family: 'Open Sans';
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    h3{
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 0;
+      position: relative;
+      a {
+        color: $white;
+      }
+      &::before{
+        content: "";
+        position: absolute;
+        @extend .icon-sprites;
+        @include sprite($sprites-arrow_green_right);
+        top: 6px;
+        left: -10px;
+      }
+    }
+    h4{
+      font-size: 11px;
+      font-weight: 300;
+      color: $white;
+    }
+  }
 }
