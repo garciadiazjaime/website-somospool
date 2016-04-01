@@ -1,7 +1,7 @@
 import React from 'react';
 
 import sitemap from '../config/sitemap';
-import MainMenu from './layout/menu/menu2';
+import MainMenu from './layout/menu/menu1';
 import Footer from './layout/footer/footer1';
 import scrollUtil from '../utils/scroll';
 import menuUtil from '../utils/menu';

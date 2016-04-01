@@ -1,5 +1,4 @@
 @import '../../../../theme/constants';
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,700');
 .mainBanner{
   background-color: $blue;
   height: 550px;
@@ -8,15 +7,9 @@
   h1{
     @extend .fCenter;
     color: $white;
-    font-family: 'Open Sans';
+    font-family: $fontA;
     font-size: 22px;
     text-align: center;
     margin: 0;
   }
-}
-
-
-@media#{$isTablet}{
-}
-@media#{$isPhone}{
 }

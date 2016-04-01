@@ -1,10 +1,9 @@
 @import '../../../../theme/constants';
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,700');
 .filtro{
   background-color: $blue;
   h2{
     display: inline-block;
-    font-family: 'Open Sans';
+    font-family: $fontA;
     font-size: 10px;
     font-weight: 300;
     color: $darkBlue;
@@ -26,10 +25,6 @@
       }
     }
   }
-}
-
-
-@media#{$isTablet}{
 }
 @media#{$isPhone}{
   .filtro{

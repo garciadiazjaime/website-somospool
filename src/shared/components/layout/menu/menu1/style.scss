@@ -1,35 +1,55 @@
 @import '../../../../theme/constants';
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,700');
-
+// ********** Control variables *********************
+$background-color: $blue;
+$button-color: $darkBlue;
+$hover-color: $lightBlue!important;
+$active: $white;
 $height: 75px;
+$toggle-border-color: $white!important;
+$bar-color: $white;
+$hamburger-background: lighten($blue, 10%)!important;
+$collapse-border-color: $white;
+
+// ********** The full navbar *********************
 .navbarDefault {
   @include border-radius(0);
   height: $height;
-  background-color: $blue!important;
+  background-color: $background-color!important;
   border: none!important;
   margin-bottom: 0;
 }
-// ********** Navbar Header es botón móvil y brand *********************
+// ********** Navbar Header consists in mobile button and brand image *********************
 .navbarHeader {
   height: $height;
   position: relative;
 }
 .navbarBrand {
+  margin-left: 0!important;
   padding: 0;
-  background-image: url(/images/logo_pool.png);
-  height: 6px;
-  width: 34px;
-  margin-top: 35px;
-  margin-right: 60px;
+  @extend .vCenter;
+  @extend .icon-sprites;
+  @include sprite($sprites-logo_pool);
+  left: 0;
 }
 .toggleButton{
   @extend .vCenter;
   margin: 0;
-  right: 0;
+  right: 15px;
+  border-color: $toggle-border-color!important;
+  .iconBar{
+    background-color: $bar-color!important;
+  }
+  &:hover, &:focus{
+    background-color: $hamburger-background;
+  }
 }
-// ********** Navbar Collapse es la sección que contiene los links que se ocultarán en móvil *********************
+// ********** Navbar Collapse contains the elements that will hide when on mobile size *********************
 .navbarCollapse{
+  float: right;
   border: none;
+  padding-right: 0;
+  padding-left: 0;
+  background: $background-color;
 }
 .navbarNav {
   >li{
@@ -37,60 +57,82 @@ $height: 75px;
   }
 }
 .navbarNavAnchor {
-  font-family: 'Open Sans';
+  font-family: $fontA;
   font-weight: 300;
-  @extend .vCenter;
   padding-top: 0!important;
   padding-bottom: 0!important;
   font-size: 14px;
-  color: $darkBlue!important;
+  color: $button-color;
   text-transform: uppercase;
+  @extend .vCenter;
   &:hover {
-    color: $lightBlue!important;
-    background-color: initial;
+    color: $hover-color;
+    background-color: transparent!important;
   }
 }
-.socialNetwork {
-  margin: 0 -15px;
-  position: relative;
-  float: right;
+.navbarIcons {
+  margin: 0;
+  position: absolute;
+  height: $height;
+  right: 0;
   padding: 0;
   li{
     height: $height;
     position: relative;
-    width: 50px;
     display: inline-block;
     list-style: none;
   }
 }
 .sm_icon {
-  @extend .fCenter;
+  @extend .vCenter;
+  right: 0;
 }
 .facebook {
   @extend .icon-sprites;
-  // @include sprite($sprites-imagen-facebook);
+  @include sprite($sprites-facebook_icon);
   @extend .sm_icon;
 }
 @media#{$isTablet}{
+  .navbarBrand{
+    left: 15px;
+  }
   .navbarNav {
     margin-right: 10px!important;
   }
-  .navbarNavAnchor {
-    padding: 10px 10px!important;
+  .navbarBrand {
+    left: 15px;
+  }
+  .navbarIcons{
+    position: relative;
+    float: right;
   }
 }
 @media#{$isPhone}{
+  .navbarBrand{
+    left: 15px;
+  }
   .navbarCollapse{
-    background: $white;
     position: relative;
     z-index: 1000;
+    float: none;
+    border-bottom: 1px solid $collapse-border-color;
+    border-top: 2px solid $collapse-border-color;
+    li {
+      height: auto;
+      padding: 15px 0;
+    }
   }
-  .navbarNav, .socialNetwork {
+  .navbarNavAnchor{
+    position: relative;
+    @include transform(translateY(0));
+    top: 0;
+  }
+  .navbarNav {
     float: none!important;
-    margin-left: 35px!important;
-    margin-right: 0!important;
+    margin: 0;
+    position: relative;
   }
-  .navbarBrand{
-    left: 10px;
+  .navbarIcons{
+    display: none;
   }
 }
