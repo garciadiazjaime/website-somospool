@@ -8,7 +8,7 @@ const style = require('./style.scss');
 import slugUtil from '../../../utils/slug';
 
 
-export default class PlaceList extends React.Component {
+export default class ProjectList extends React.Component {
 
   getTitle(data, baseUrl) {
     const placeSlug = slugUtil(data.title);
@@ -43,7 +43,7 @@ export default class PlaceList extends React.Component {
   }
 }
 
-PlaceList.propTypes = {
-  data: React.PropTypes.array.isRequired,
+ProjectList.propTypes = {
+  data: React.PropTypes.array,
   baseUrl: React.PropTypes.string.isRequired,
 };

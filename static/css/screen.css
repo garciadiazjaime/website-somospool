@@ -239,3 +239,106 @@
     margin-top: 30px; }
   .style__facebook___39dVV {
     margin-top: 30px; } }
+.style__fCenter___Awltf {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%); }
+
+.style__vCenter___2LWX6 {
+  position: absolute;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.style__vCenterRel___29EI3 {
+  position: relative;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.style__hCenter___2QtNO {
+  position: absolute;
+  left: 50%;
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
+.style__inheritHeight___c3WLk {
+  height: inherit; }
+
+.style__hideOverflow___3AF4T {
+  overflow: hidden; }
+
+.style__active___2j7T0 {
+  color: #F8B413 !important; }
+  .style__active___2j7T0::after {
+    content: "";
+    width: 0;
+    height: 0;
+    right: 0;
+    position: absolute;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid #F8B413;
+    top: -5px; }
+.style__fCenter___2n8bI {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%); }
+
+.style__vCenter___QqB4J {
+  position: absolute;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.style__vCenterRel___qLUAn {
+  position: relative;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.style__hCenter___3z1g8 {
+  position: absolute;
+  left: 50%;
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
+.style__inheritHeight___qxG0A {
+  height: inherit; }
+
+.style__hideOverflow___2Pvbt {
+  overflow: hidden; }
+
+.style__container___2sw4_ {
+  border: 1px solid gray; }
+
+.style__placeCard___3gc-N {
+  border: 1px dotted blue; }
