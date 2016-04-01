@@ -1,39 +1,20 @@
 @import './helpers';
 @import './mixins';
 @import './sprite';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,700');
+@import url('https://fonts.googleapis.com/css?family=Teko');
 
-$blue: #04B9C9;
-$hoverBlue: #0BCED3;
-$darkBlue: #1D3A4C;
-$blueGray: #839DAA;
-$lightBlue: #E6FFFE;
-$red: #EC645D;
-$hoverRed: #EA5653;
-$orange: #F8B413;
-$hoverOrange: #F9C050;
-$green: #CADD17;
-$hoverGreen: #E1EA2D;
-$lightGray: #C0C2C4;
-$gray: #58595B;
-$mediumGray: #999B9D;
-$black: #000;
+$blue: #205dff;
+$darkBlue: #00398c;
+$lightBlue: #c0d4ff;
 $white: #fff;
+$black: #000;
+$darkGray: #161616;
+$gray: #6d6e71;
 
-$fontA: 'novecentowide_medium';
-$fontABold: 'novecentowide_bold';
-$fontADemibold: 'novecentowide_demibold';
-$fontALight: 'novecentowide_light';
-$fontABook: 'novecentowide_book';
+$fontA: 'Open Sans', sans-serif;
+$fontB: 'Teko';
 
-$fontB: 'opensans_regular';
-$fontBBold: 'opensans_bold';
-$fontBItalic: 'opensans_italic';
-
-$fontCItalic: 'droidserif_italic';
-
-
-$isTablet: "only screen and (max-width: 1023px)";
+$isLaptop: "only screen and (min-width: 1024px)";
+$isTablet: "only screen and (min-width: 768px) and (max-width: 1023px)";
 $isPhone: "only screen and (max-width: 767px)";
-
-$headerAdjuster: "only screen and (max-width: 969px) and (min-width: 767px)";
-$layout-phone_icon: -30px -35px 25px 16px;

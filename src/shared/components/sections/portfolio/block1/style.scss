@@ -1,0 +1,15 @@
+@import '../../../../theme/constants';
+.mainBanner{
+  background-color: $blue;
+  height: 550px;
+  margin-top: 75px;
+  position: relative;
+  h1{
+    @extend .fCenter;
+    color: $white;
+    font-family: $fontA;
+    font-size: 22px;
+    text-align: center;
+    margin: 0;
+  }
+}

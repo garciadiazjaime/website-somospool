@@ -15,3 +15,7 @@ a:hover {
 #app{
 	overflow: hidden;
 }
+.navbar-nav .active a{
+  background-color: transparent!important;
+  color: #fff!important;
+}

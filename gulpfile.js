@@ -5,6 +5,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var replace = require('gulp-replace');
 var gulpCopy = require('gulp-copy');
+var gulpif = require('gulp-if');
 var config = require('./config');
 var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
