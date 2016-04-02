@@ -23,7 +23,7 @@ export default class MainMenu extends React.Component {
   getIcons(data) {
     return data.map((item, index) => {
       return (<li key={index}>
-          <a href={item.url} className={style[item.title]} id={item.url} target="_blank" />
+          <Link to={item.url} className={style[item.title]} id={item.url} target="_blank" />
         </li>
       );
     });
@@ -31,28 +31,30 @@ export default class MainMenu extends React.Component {
 
   render() {
     /*eslint-disable */
-    return (<nav className={style.navbarDefault + ' navbar navbar-default'} id="menu_wrapper">
-            <div className="container-fluid">
-              <div className={style.navbarHeader + ' navbar-header'}>
-                <button type="button" className="navbar-toggle collapsed menu_trigger" data-toggle="collapse" data-target="#mainmenu" aria-expanded="false">
-                  <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                </button>
-                <Link className={style.navbarBrand + ' navbar-brand'} to="/inicio" />
-              </div>
+    return (<nav className={style.navbarDefault + ' navbar navbar navbar-fixed-top'} id="menu_wrapper">
+      <div className="container-fluid">
+        <div className="row">
+          <div className={style.navbarHeader + ' navbar-header'}>
+            <button type="button" className={'navbar-toggle collapsed menu_trigger ' + style.toggleButton} data-toggle="collapse" data-target="#mainmenu" aria-expanded="false">
+              <span className="sr-only">Toggle navigation</span>
+              <span className={'icon-bar ' + style.iconBar}></span>
+              <span className={'icon-bar ' + style.iconBar}></span>
+              <span className={'icon-bar ' + style.iconBar}></span>
+            </button>
+            <Link className={style.navbarBrand + ' navbar-brand'} to="/inicio" />
+          </div>
 
-              <div className={style.navbarCollapse + ' collapse navbar-collapse'} id='mainmenu'>
-                <ul className={style.socialNetwork}>
-                  {this.getIcons(this.props.icons)}
-                </ul>
-                <ul className={style.navbarNav + ' nav navbar-nav'}>
-                  {this.getItems(this.props.items)}
-                </ul>
-              </div>
-            </div>
-        </nav>);
+          <div className={style.navbarCollapse + ' collapse navbar-collapse'} id='mainmenu'>
+            <ul className={style.navbarIcons}>
+              {this.getIcons(this.props.icons)}
+            </ul>
+            <ul className={style.navbarNav + ' nav navbar-nav'}>
+              {this.getItems(this.props.items)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>);
     /*eslint-enable */
   }
 }

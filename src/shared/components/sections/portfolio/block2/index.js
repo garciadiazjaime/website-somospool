@@ -1,8 +1,10 @@
 import React from 'react';
+import _ from 'lodash';
 
 import { CategoryList } from '../../../elements/category';
 import { ProjectList, filterProjectsByCategory } from '../../../elements/project';
 import restClient from '../../../../../server/helpers/rest-client';
+const style = require('./style.scss');
 
 
 export default class Block2 extends React.Component {
@@ -30,11 +32,18 @@ export default class Block2 extends React.Component {
 
     if (promises.length) {
       Promise.all(promises).then((data) => {
+        const { portfolio } = this.state;
+
+        if (data[0] && _.isArray(data[0].entity)) {
+          portfolio.categories = data[0].entity;
+        }
+
+        if (data[1] && _.isArray(data[1].entity)) {
+          portfolio.projects = data[1].entity;
+        }
+
         this.setState({
-          portfolio: {
-            categories: data[0].entity,
-            projects: data[1].entity,
-          },
+          portfolio,
         });
       });
     }
@@ -45,10 +54,18 @@ export default class Block2 extends React.Component {
     const { portfolio } = this.state;
     const places = filterProjectsByCategory(portfolio.projects, category);
 
-    return (<div className="container">
-      <div className="row">
-        <h2>Filtro:</h2>
-        <CategoryList data={portfolio.categories} category={category} baseUrl="portafolio" />
+    return (<div>
+      <div className={style.filtro}>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-xs-2 col-sm-1">
+              <h2>Filtro:</h2>
+            </div>
+            <div className="col-xs-10 col-sm-11">
+              <CategoryList data={portfolio.categories} category={category} baseUrl="portafolio" />
+            </div>
+          </div>
+        </div>
       </div>
       <div className="row">
         <ProjectList data={places} baseUrl="portafolio" />

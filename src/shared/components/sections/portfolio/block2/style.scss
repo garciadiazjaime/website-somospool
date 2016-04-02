@@ -1,0 +1,41 @@
+@import '../../../../theme/constants';
+.filtro{
+  background-color: $blue;
+  h2{
+    display: inline-block;
+    font-family: $fontA;
+    font-size: 10px;
+    font-weight: 300;
+    color: $darkBlue;
+    text-transform: uppercase;
+  }
+  ul{
+    padding-left: 0;
+    li{
+      display: inline-block;
+      h2{
+        a{
+          font-weight: 700;
+          color: $darkBlue;
+          margin-right: 50px;
+          &:hover{
+            color: $lightBlue;
+          }
+        }
+      }
+    }
+  }
+}
+@media#{$isPhone}{
+  .filtro{
+    ul{
+      li{
+        h2{
+          a{
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
+}

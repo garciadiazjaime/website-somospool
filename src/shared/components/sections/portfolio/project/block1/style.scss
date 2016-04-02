@@ -1,0 +1,149 @@
+@import '../../../../../theme/constants';
+.project{
+  font-family: $fontA;
+  .banner{
+    position: relative;
+    max-width: 100%;
+    overflow: auto;
+    .legend{
+      left: 0;
+      width: 100%;
+      color: $white;
+      @extend .vCenter;
+      h1{
+        font-size: 35px;
+        margin-bottom: 70px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      h2 {
+        font-family: $fontA;
+        font-size: 18px;
+        margin-bottom: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        position: relative;
+        &::before{
+          content: "";
+          position: absolute;
+          @extend .icon-sprites;
+          @include sprite($sprites-arrow_green_down);
+          left: -20px;
+          top: 7px;
+        }
+      }
+      h3 {
+        font-family: $fontA;
+        font-size: 11px;
+        font-weight: 300;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .description{
+    padding: 120px 0 175px;
+    color: $black;
+    h2{
+      font-family: $fontB;
+      margin-top: 0;
+      margin-bottom: 35px;
+      font-size: 41px;
+      text-transform: uppercase;
+    }
+    p{
+      font-weight: 300;
+      margin-bottom: 25px;
+    }
+  }
+  img {
+    width: 100%;
+  }
+  .navigate{
+    padding: 50px 0 70px;
+    font-family: $fontB;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: $blue;
+    a{
+      display: inline-block;
+      color: $blue;
+    }
+    .sm{
+      color: $black;
+      margin: 0 25px;
+      cursor: pointer;
+      &:hover{
+        color: $darkBlue;
+      }
+    }
+    p{
+      display: inline-block;
+      margin-right: 25px;
+    }
+    .proyectos {
+      display: inline-block;
+      position: relative;
+      &::before{
+        content: "";
+        position: absolute;
+        @extend .icon-sprites;
+        @include sprite($sprites-arrow_blue_left);
+        left: -10px;
+        top: 6px;
+      }
+      &:hover{
+        color: $darkBlue;
+      }
+    }
+  }
+}
+@media#{$isTablet}{
+  .project{
+    .navigate {
+      p {
+        margin-right: 10px;
+      }
+      .sm {
+        margin: 0 10px;
+      }
+    }
+  }
+}
+@media#{$isPhone}{
+  .project {
+    .banner {
+      img {
+        width: auto;
+        height: 100%;
+        margin: 0 auto;
+        display: block;
+      }
+      .legend {
+        h1 {
+          font-size: 20px;
+        }
+      }
+    }
+    .filtro {
+      ul {
+        li {
+          h2 {
+            a {
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+    }
+    .navigate {
+      p {
+        display: block;
+        margin-right: 0;
+      }
+      .sm {
+        display: block;
+        margin: 0;
+      }
+    }
+  }
+}
