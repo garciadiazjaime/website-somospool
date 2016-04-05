@@ -26,7 +26,7 @@ Deploy project
 `npm run deploy`
 
 Login rch
-setup -l setup email
+rch -l setup email
 
 Remove Cartridge
 http://stackoverflow.com/questions/31323791/how-do-you-delete-a-database-cartridge-on-an-openshift-app

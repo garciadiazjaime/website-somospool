@@ -1,6 +1,7 @@
 import AppHandler from '../../components/AppHandler';
 import HomeSection from '../../components/sections/home';
 import PortfolioSection from '../../components/sections/portfolio';
+import ProjectSection from '../../components/sections/portfolio/project';
 import AboutSection from '../../components/sections/about';
 import ServicesSection from '../../components/sections/services';
 import ContactSection from '../../components/sections/contact';
@@ -11,6 +12,7 @@ export default {
     component: AppHandler,
     default: HomeSection,
     portfolio: PortfolioSection,
+    project: ProjectSection,
     children: [{
       title: 'Inicio',
       url: '/inicio',

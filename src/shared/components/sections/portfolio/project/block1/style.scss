@@ -1,4 +1,4 @@
-@import '../../../../theme/constants';
+@import '../../../../../theme/constants';
 .project{
   font-family: $fontA;
   .banner{
@@ -71,6 +71,7 @@
     .sm{
       color: $black;
       margin: 0 25px;
+      cursor: pointer;
       &:hover{
         color: $darkBlue;
       }

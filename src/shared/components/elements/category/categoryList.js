@@ -44,7 +44,7 @@ export default class CategoryList extends React.Component {
 }
 
 CategoryList.propTypes = {
-  data: React.PropTypes.array.isRequired,
+  data: React.PropTypes.array,
   category: React.PropTypes.string,
   baseUrl: React.PropTypes.string.isRequired,
 };

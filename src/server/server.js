@@ -1,14 +1,23 @@
+/* eslint max-len: [2, 500, 4] */
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import bodyParser from 'body-parser';
 
+import DataWrapper from './dataWrapper';
 import config from '../../config';
 import apiRoutes from './helpers/api';
 import routes from '../shared/config/routes';
+import restClient from './helpers/rest-client';
 
 const app = express();
+
+const _portfolioData = {
+  categories: [],
+  projects: [],
+};
+const apiUrl = config.get('apiUrl');
 
 app.set('views', './views');
 app.set('view engine', 'jade');
@@ -22,16 +31,53 @@ app.use(express.static('static'));
 
 app.use('/api/', apiRoutes);
 
-app.get('/*', function (req, res) {
+app.get('/*', (req, res, next) => {
+  const promises = [];
+
+  if (req.url.indexOf('portafolio') !== -1) {
+    promises.push(new Promise((resolve, reject) => {
+      restClient({
+        path: apiUrl + 'api/category/',
+      }).then((response) => {
+        resolve(response.entity);
+      }, (response) => {
+        reject(response);
+      });
+    }));
+
+    promises.push(new Promise((resolve, reject) => {
+      restClient({
+        path: apiUrl + 'api/project/',
+      }).then((response) => {
+        resolve(response.entity);
+      }, (response) => {
+        reject(response);
+      });
+    }));
+  }
+
+  if (promises.length) {
+    Promise.all(promises).then((data) => {
+      _portfolioData.categories = data[0];
+      _portfolioData.projects = data[1];
+      next();
+    });
+  } else {
+    next();
+  }
+}, (req, res) => {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const content = renderToString(<RoutingContext {...renderProps} />);
-      res.render('index', { content });
-      // res.status(200).send(renderToString(<RoutingContext {...renderProps} />))
+      const props = req.url.indexOf('portafolio') !== -1 ? {
+        categories: _portfolioData.categories,
+        projects: _portfolioData.projects,
+      } : {};
+      const content = renderToString(<DataWrapper data={props}><RoutingContext {...renderProps} /></DataWrapper>);
+      res.render('index', { content, props, apiUrl });
     } else {
       res.status(404).send('Not found');
     }

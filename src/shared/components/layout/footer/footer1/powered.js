@@ -13,7 +13,7 @@ export default class Powered extends React.Component {
               <p>Derechos reservados &copy; BrandingPool</p>
             </div>
             <div className={'col-xs-4 ' + style.column}>
-              <p>Código por <a href="http://www.mintitmedia.com">Mint</a></p>
+              <p>Código por <a href="http://www.mintitmedia.com" title="Diseño y Desarrollo Web Tijuana" target="_blank">Mint</a></p>
             </div>
             <div className={'col-xs-4 ' + style.column}>
               <span className={style.logo} />
