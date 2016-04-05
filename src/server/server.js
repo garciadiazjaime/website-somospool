@@ -17,6 +17,7 @@ const _portfolioData = {
   categories: [],
   projects: [],
 };
+const apiUrl = config.get('apiUrl');
 
 app.set('views', './views');
 app.set('view engine', 'jade');
@@ -36,7 +37,7 @@ app.get('/*', (req, res, next) => {
   if (req.url.indexOf('portafolio') !== -1) {
     promises.push(new Promise((resolve, reject) => {
       restClient({
-        path: 'http://127.0.0.1:8000/api/category/',
+        path: apiUrl + 'api/category/',
       }).then((response) => {
         resolve(response.entity);
       }, (response) => {
@@ -46,7 +47,7 @@ app.get('/*', (req, res, next) => {
 
     promises.push(new Promise((resolve, reject) => {
       restClient({
-        path: 'http://127.0.0.1:8000/api/project/',
+        path: apiUrl + 'api/project/',
       }).then((response) => {
         resolve(response.entity);
       }, (response) => {
@@ -76,7 +77,7 @@ app.get('/*', (req, res, next) => {
         projects: _portfolioData.projects,
       } : {};
       const content = renderToString(<DataWrapper data={props}><RoutingContext {...renderProps} /></DataWrapper>);
-      res.render('index', { content, props });
+      res.render('index', { content, props, apiUrl });
     } else {
       res.status(404).send('Not found');
     }

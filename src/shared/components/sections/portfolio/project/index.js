@@ -28,7 +28,7 @@ export default class ProjectSection extends React.Component {
     const promises = [];
     if (project) {
       promises.push(restClient({
-        path: 'http://127.0.0.1:8000/api/block/?project_id=' + project.id,
+        path: window._apiUrl + 'api/block/?project_id=' + project.id,
       }));
     }
 

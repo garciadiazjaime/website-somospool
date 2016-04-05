@@ -20,13 +20,13 @@ export default class Block2 extends React.Component {
     const promises = [];
     if (!this.state.portfolio.categories) {
       promises.push(restClient({
-        path: 'http://127.0.0.1:8000/api/category/',
+        path: window._apiUrl + 'api/category/',
       }));
     }
 
     if (!this.state.portfolio.projects) {
       promises.push(restClient({
-        path: 'http://127.0.0.1:8000/api/project/',
+        path: window._apiUrl + 'api/project/',
       }));
     }
 
