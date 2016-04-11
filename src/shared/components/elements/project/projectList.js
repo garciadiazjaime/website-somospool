@@ -28,6 +28,14 @@ export default class ProjectList extends React.Component {
         return (<div className={'col-sm-6 col-xs-12 ' + style.placeCard} key={index} onClick={this.handleClick.bind(this, item)}>
             <div className="row">
               <img src={imgUrl} alt={item.title} />
+              <div className={style.legend}>
+                <h3 key={index}>
+                  {item.title}
+                </h3>
+                <h4>
+                  {item.subtitle}
+                </h4>
+              </div>
             </div>
           </div>);
         /*eslint-enable */

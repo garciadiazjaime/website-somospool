@@ -1,8 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { CategoryList } from '../../../elements/category';
-import { ProjectList, filterProjectsByCategory } from '../../../elements/project';
+import { CategoryList, getCategoryId } from '../../../elements/category';
+import { ProjectList, filterProjectsByCategoryId } from '../../../elements/project';
 import restClient from '../../../../../server/helpers/rest-client';
 const style = require('./style.scss');
 
@@ -52,7 +52,8 @@ export default class Block2 extends React.Component {
   render() {
     const { category } = this.props;
     const { portfolio } = this.state;
-    const places = filterProjectsByCategory(portfolio.projects, category);
+    const categoryId = getCategoryId(portfolio.categories, category);
+    const projects = filterProjectsByCategoryId(portfolio.projects, categoryId);
 
     return (<div>
       <div className={style.filtro}>
@@ -68,7 +69,7 @@ export default class Block2 extends React.Component {
         </div>
       </div>
       <div className="row">
-        <ProjectList data={places} baseUrl="portafolio" />
+        <ProjectList data={projects} baseUrl="portafolio" />
       </div>
     </div>);
   }

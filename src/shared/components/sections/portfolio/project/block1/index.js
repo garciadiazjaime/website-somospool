@@ -1,9 +1,10 @@
+/* eslint max-len: [2, 500, 4] */
 import React from 'react';
 import { Link } from 'react-router';
 import _ from 'lodash';
 const style = require('./style.scss');
 
-export default class Block2 extends React.Component {
+export default class Block1 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -26,9 +27,52 @@ export default class Block2 extends React.Component {
   renderImage(project, item, index) {
     if (item && _.isArray(item.image_set) && item.image_set.length) {
       const imgUrl = item.image_set[0].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+      // <img src={imgUrl} alt={project.title} className="img-responsive" />
+      console.log('imgUrl', imgUrl);
+
+      (function (imageIndex) {
+        console.log('imageIndex:start', imageIndex);
+        const downloadingImage = new Image();
+        downloadingImage.onload = function () {
+          // image.src = this.src;
+          console.log('imageIndex:end', imageIndex);
+          $('#image_' + imageIndex).attr('src', this.src);
+        };
+        downloadingImage.src = imgUrl;
+      })(index);
+
       return (<div key={index}>
-          <img src={imgUrl} alt={project.title} className="img-responsive" />
+          <img src="/images/landing.gif" alt={project.title} className="img-responsive" id={'image_' + index} />
         </div>);
+    }
+    return null;
+  }
+
+  renderDescription(project, item, index) {
+    let response;
+    if (item && item.text && item.text.length) {
+      const bits = item.text.split('\r\n');
+      if (bits.length > 1) {
+        response = bits.map((text, index2) => {
+          if (index2 === 0) {
+            return (<h2 key={index2}>{text}</h2>);
+          } else if (text === '') {
+            return (<br />);
+          }
+          return (<p key={index2}>{text}</p>);
+        });
+      } else {
+        response = (<p key={index}>
+          {item.text}
+        </p>);
+      }
+      return (<div className="container-fluid" key={index}>
+        <div clasName="row">
+          <div className={'col-xs-12 col-sm-8 col-sm-offset-2 ' + style.description}>
+            {response}
+          </div>
+        </div>
+      </div>);
     }
     return null;
   }
@@ -39,6 +83,8 @@ export default class Block2 extends React.Component {
         switch (item.type.toUpperCase()) {
           case 'IMAGE':
             return this.renderImage(data.info, item, index);
+          case 'DESCRIPTION':
+            return this.renderDescription(data.info, item, index);
           default:
             return null;
         }
@@ -68,6 +114,6 @@ export default class Block2 extends React.Component {
   }
 }
 
-Block2.propTypes = {
+Block1.propTypes = {
   project: React.PropTypes.object,
 };
