@@ -67,10 +67,8 @@ export default class Block2 extends React.Component {
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
+        </div>
         <ProjectList data={projects} baseUrl="portafolio" />
-      </div>
     </div>);
   }
 }
