@@ -3,6 +3,7 @@
 .placeCard {
   position: relative;
   cursor: pointer;
+  background: $black;
 
   &:hover {
     .legend {
@@ -12,6 +13,11 @@
 
   img{
     width: 100%;
+    opacity:1;
+    transition:opacity 0.6s linear;
+    &:hover{
+      opacity: .7;
+    }
   }
   .legend{
     font-family: 'Open Sans';
