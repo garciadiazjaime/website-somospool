@@ -4,3 +4,4 @@ bower_components
 npm-debug.log
 dist/server.js
 static/js/app.js
+.ruby-version

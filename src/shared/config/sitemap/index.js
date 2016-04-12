@@ -1,39 +1,43 @@
 import AppHandler from '../../components/AppHandler';
-import HomeSection from '../../components/sections/home';
+// import HomeSection from '../../components/sections/home';
 import PortfolioSection from '../../components/sections/portfolio';
 import ProjectSection from '../../components/sections/portfolio/project';
-import AboutSection from '../../components/sections/about';
-import ServicesSection from '../../components/sections/services';
-import ContactSection from '../../components/sections/contact';
+// import AboutSection from '../../components/sections/about';
+// import ServicesSection from '../../components/sections/services';
+// import ContactSection from '../../components/sections/contact';
 
+// {
+//   title: 'Inicio',
+//   url: '/inicio',
+//   component: HomeSection,
+// },
+// {
+//   title: 'Nosotros',
+//   url: '/nosotros',
+//   component: AboutSection,
+// },
+// {
+//  title: 'Servicios',
+//  url: '/servicios',
+//  component: ServicesSection,
+// }, {
+//  title: 'Contacto',
+//  url: '/contacto',
+//  component: ContactSection,
+// }
+// {
+//   title: 'Portafolio',
+//   url: '/portafolio',
+//   component: PortfolioSection,
+// }
 
 export default {
   items: {
     component: AppHandler,
-    default: HomeSection,
+    default: PortfolioSection,
     portfolio: PortfolioSection,
     project: ProjectSection,
-    children: [{
-      title: 'Inicio',
-      url: '/inicio',
-      component: HomeSection,
-    }, {
-      title: 'Nosotros',
-      url: '/nosotros',
-      component: AboutSection,
-    }, {
-      title: 'Portafolio',
-      url: '/portafolio',
-      component: PortfolioSection,
-    }, {
-      title: 'Servicios',
-      url: '/servicios',
-      component: ServicesSection,
-    }, {
-      title: 'Contacto',
-      url: '/contacto',
-      component: ContactSection,
-    }],
+    children: [],
   },
   icons: [{
     title: 'facebook',

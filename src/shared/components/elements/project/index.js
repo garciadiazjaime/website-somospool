@@ -1,5 +1,5 @@
 import ProjectList from './projectList';
-import filterProjectsByCategory from './filterProjectsByCategory';
+import filterProjectsByCategoryId from './filterProjectsByCategoryId';
 
 module.exports.ProjectList = ProjectList;
-module.exports.filterProjectsByCategory = filterProjectsByCategory;
+module.exports.filterProjectsByCategoryId = filterProjectsByCategoryId;

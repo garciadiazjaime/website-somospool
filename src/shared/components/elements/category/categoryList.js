@@ -33,7 +33,7 @@ export default class CategoryList extends React.Component {
     return (<ul>
       <li>
         <h2>
-          <Link to={'/' + baseUrl} title="ver todos" className={style[activeClassName]}>
+          <Link to={'/'} title="ver todos" className={style[activeClassName]}>
             Todos
           </Link>
         </h2>
