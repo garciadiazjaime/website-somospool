@@ -9,6 +9,25 @@ export default class Block1 extends React.Component {
   constructor(props) {
     super(props);
     this.shareFacebook = this.shareFacebook.bind(this);
+    this.state = {
+      images: [],
+    };
+  }
+
+  getImage(url, index) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve({
+          url,
+          index,
+        });
+      };
+      img.onerror = () => {
+        reject(url);
+      };
+      img.src = url;
+    });
   }
 
   shareFacebook() {
@@ -24,25 +43,32 @@ export default class Block1 extends React.Component {
     window.open(url, '_blank');
   }
 
+  displayImages(images) {
+    const imageData = images.shift();
+    const rescursive = this.displayImages;
+    if (imageData) {
+      this.getImage(imageData.url, imageData.index)
+        .then((data) => {
+          $('#image_' + data.index).attr('src', data.url);
+          rescursive(images);
+        })
+        .catch((url) => {
+          console.log('Error loading ' + url);
+          rescursive(images);
+        });
+    }
+  }
+
   renderImage(project, item, index) {
     if (item && _.isArray(item.image_set) && item.image_set.length) {
       const imgUrl = item.image_set[0].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-      // <img src={imgUrl} alt={project.title} className="img-responsive" />
-      console.log('imgUrl', imgUrl);
-
-      (function (imageIndex) {
-        console.log('imageIndex:start', imageIndex);
-        const downloadingImage = new Image();
-        downloadingImage.onload = function () {
-          // image.src = this.src;
-          console.log('imageIndex:end', imageIndex);
-          $('#image_' + imageIndex).attr('src', this.src);
-        };
-        downloadingImage.src = imgUrl;
-      })(index);
+      this.state.images.push({
+        url: imgUrl,
+        index,
+      });
 
       return (<div key={index}>
-          <img src="/images/landing.gif" alt={project.title} className="img-responsive" id={'image_' + index} />
+          <img src="/images/landing.png" alt={project.title} className={'img-responsive ' + style.imagePlaceholder } id={'image_' + index} />
         </div>);
     }
     return null;
@@ -96,6 +122,7 @@ export default class Block1 extends React.Component {
   render() {
     const { project } = this.props;
     const projectEl = this.renderProject(project);
+    this.displayImages(this.state.images);
     return (<div className={style.project}>
       {projectEl}
       <div className="container-fluid">
