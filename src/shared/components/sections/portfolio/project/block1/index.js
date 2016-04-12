@@ -9,6 +9,7 @@ export default class Block1 extends React.Component {
   constructor(props) {
     super(props);
     this.shareFacebook = this.shareFacebook.bind(this);
+    this.displayImages = this.displayImages.bind(this);
     this.state = {
       images: [],
     };
@@ -49,7 +50,7 @@ export default class Block1 extends React.Component {
     if (imageData) {
       this.getImage(imageData.url, imageData.index)
         .then((data) => {
-          $('#image_' + data.index).attr('src', data.url);
+          $('#image_' + data.index).attr('src', data.url).css('maxHeight', 'inherit');
           rescursive(images);
         })
         .catch((url) => {
@@ -128,7 +129,7 @@ export default class Block1 extends React.Component {
       <div className="container-fluid">
         <div className={'row ' + style.navigate}>
           <div className="col-xs-5 xs-offset-1 col-sm-7 col-xs-offset-1">
-            <Link className={style.proyectos} to="/portafolio" title="proyectos">Proyectos</Link>
+            <Link className={style.proyectos} to="/" title="proyectos">Proyectos</Link>
           </div>
           <div className="col-xs-6 col-sm-4">
             <p>Compartir</p>

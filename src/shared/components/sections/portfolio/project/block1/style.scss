@@ -99,6 +99,7 @@
 }
 .imagePlaceholder {
   background: url(/images/loading.gif) 50% no-repeat;
+  max-height: 100px;
 }
 @media#{$isTablet}{
   .project{
