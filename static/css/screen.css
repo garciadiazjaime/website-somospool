@@ -409,11 +409,16 @@
 
 .style__placeCard___3gc-N {
   position: relative;
-  cursor: pointer; }
+  cursor: pointer;
+  background: #000; }
   .style__placeCard___3gc-N:hover .style__legend___16xt3 {
     opacity: 1; }
   .style__placeCard___3gc-N img {
-    width: 100%; }
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.6s linear; }
+    .style__placeCard___3gc-N img:hover {
+      opacity: .7; }
   .style__placeCard___3gc-N .style__legend___16xt3 {
     font-family: 'Open Sans';
     position: absolute;
