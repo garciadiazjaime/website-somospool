@@ -31,6 +31,37 @@ export default class Block1 extends React.Component {
     });
   }
 
+  getTextEl(item, index) {
+    if (item && item.text && item.text.length) {
+      const bits = item.text.split('\r\n');
+      if (bits.length > 1) {
+        return bits.map((text, index2) => {
+          if (index2 === 0) {
+            return (<h2 key={index2}>{text}</h2>);
+          } else if (text === '') {
+            return (<br />);
+          }
+          return (<p key={index2}>{text}</p>);
+        });
+      }
+    }
+    return (<p key={index}>
+      {item.text}
+    </p>);
+  }
+
+  getImageEl(project, item, index) {
+    if (item && _.isArray(item.image_set) && item.image_set.length) {
+      const imgUrl = item.image_set[0].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+      this.state.images.push({
+        url: imgUrl,
+        index,
+      });
+      return (<img src="/images/placeholder.png" alt={project.title} className={'img-responsive ' + style.imagePlaceholder } id={'image_' + index} />);
+    }
+    return null;
+  }
+
   shareFacebook() {
     const projectUrl = encodeURIComponent(window.location.href);
     const data = [
@@ -61,47 +92,20 @@ export default class Block1 extends React.Component {
   }
 
   renderImage(project, item, index) {
-    if (item && _.isArray(item.image_set) && item.image_set.length) {
-      const imgUrl = item.image_set[0].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-      this.state.images.push({
-        url: imgUrl,
-        index,
-      });
-
-      return (<div key={index}>
-          <img src="/images/landing.png" alt={project.title} className={'img-responsive ' + style.imagePlaceholder } id={'image_' + index} />
-        </div>);
-    }
-    return null;
+    return (<div key={index}>
+      {this.getImageEl(project, item, index)}
+    </div>);
   }
 
-  renderText(project, item, index) {
-    let response;
-    if (item && item.text && item.text.length) {
-      const bits = item.text.split('\r\n');
-      if (bits.length > 1) {
-        response = bits.map((text, index2) => {
-          if (index2 === 0) {
-            return (<h2 key={index2}>{text}</h2>);
-          } else if (text === '') {
-            return (<br />);
-          }
-          return (<p key={index2}>{text}</p>);
-        });
-      } else {
-        response = (<p key={index}>
-          {item.text}
-        </p>);
-      }
-      return (<div className="container-fluid" key={index}>
-        <div clasName="row">
-          <div className={'col-xs-12 col-sm-8 col-sm-offset-2 ' + style.description}>
-            {response}
-          </div>
+  renderText(item, index) {
+    const textEl = this.getTextEl(item, index);
+    return (<div className="container-fluid" key={index}>
+      <div clasName="row">
+        <div className={'col-xs-12 col-sm-8 col-sm-offset-2 ' + style.description}>
+          {textEl}
         </div>
-      </div>);
-    }
-    return null;
+      </div>
+    </div>);
   }
 
   renderImageImage(project, item, index) {
@@ -111,13 +115,9 @@ export default class Block1 extends React.Component {
       const images = [imgUrl1, imgUrl2];
       const imagesEl = images.map((image, index2) => {
         const imageId = index + '_' + index2;
-        this.state.images.push({
-          url: imgUrl1,
-          index: imageId,
-        });
-        return (<div className="col-sm-6 col-xs-12">
+        return (<div className="col-sm-6 col-xs-12" key={index2}>
           <div className="row">
-            <img src="/images/landing.png" alt={project.title} className={'img-responsive ' + style.imagePlaceholder } id={'image_' + imageId} />
+            {this.getImageEl(project, item, imageId)}
           </div>
         </div>);
       });
@@ -130,13 +130,32 @@ export default class Block1 extends React.Component {
     return null;
   }
 
+  renderTextImage(project, item, index, type) {
+    const textEl = this.getTextEl(item, index);
+    const imageEl = this.getImageEl(project, item, index);
+    const content = [];
+    if (type === 'TEXT_IMAGE') {
+      content.push((<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
+        {textEl}
+      </div>), (<div className={'col-xs-12 col-sm-6'} key={2}>
+        {imageEl}
+      </div>));
+    } else {
+      content.push((<div className={'col-xs-12 col-sm-6'} key={2}>
+        {imageEl}
+      </div>), (<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
+        {textEl}
+      </div>));
+    }
+    return (<div className="container-fluid" key={index}>
+      <div clasName="row">
+        {content}
+      </div>
+    </div>);
+  }
+
   renderProject(data) {
-    // ('IMAGE', 'IMAGE'),
-    // ('TEXT', 'TEXT'),
     // ('SLIDER', 'SLIDER'),
-    // ('IMAGE_IMAGE', 'IMAGE_IMAGE'),
-    // ('TEXT_IMAGE', 'TEXT_IMAGE'),
-    // ('IMAGE_TEXT', 'IMAGE_TEXT'),
     // ('SLIDER_TEXT', 'SLIDER_TEXT'),
     // ('TEXT_SLIDER', 'TEXT_SLIDER'),
     // ('IMAGE_SLIDER', 'IMAGE_SLIDER'),
@@ -147,9 +166,12 @@ export default class Block1 extends React.Component {
           case 'IMAGE':
             return this.renderImage(data.info, item, index);
           case 'TEXT':
-            return this.renderText(data.info, item, index);
+            return this.renderText(item, index);
           case 'IMAGE_IMAGE':
             return this.renderImageImage(data.info, item, index);
+          case 'TEXT_IMAGE':
+          case 'IMAGE_TEXT':
+            return this.renderTextImage(data.info, item, index, item.type.toUpperCase());
           default:
             return null;
         }
