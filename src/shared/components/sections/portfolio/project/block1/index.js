@@ -219,6 +219,58 @@ export default class Block1 extends React.Component {
         </Carousel>
       </div>));
     }
+    return (<div key={index}>
+      {content}
+    </div>);
+  }
+
+  renderSliderImage(project, item, index, type) {
+    const images = _.clone(item.image_set);
+    let imageData = {};
+    let sliderData = {};
+    if (type === 'SLIDER_IMAGE') {
+      imageData = {
+        image_set: [images.pop()],
+      };
+      sliderData = {
+        image_set: images,
+      };
+    } else {
+      imageData = {
+        image_set: [images.shift()],
+      };
+      sliderData = {
+        image_set: images,
+      };
+    }
+    const sliderEl = this.getSliderEl(project, sliderData, index);
+    const imageEl = this.getImageEl(project, imageData, index);
+    const content = [];
+    const carouselClasses = {
+      inner: style.inner,
+      controls: {
+        base: style.controls,
+        prev: style.prev,
+        next: style.next,
+      },
+    };
+    if (type === 'SLIDER_IMAGE') {
+      content.push((<div className="col-xs-12 col-sm-6" key={1}>
+        <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+          {sliderEl}
+        </Carousel>
+      </div>), (<div className="col-xs-12 col-sm-6" key={2}>
+        {imageEl}
+      </div>));
+    } else {
+      content.push((<div className="col-xs-12 col-sm-6" key={2}>
+        {imageEl}
+      </div>), (<div className="col-xs-12 col-sm-6" key={1}>
+        <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+          {sliderEl}
+        </Carousel>
+      </div>));
+    }
     return (<div className="container-fluid" key={index}>
       <div clasName="row">
         {content}
@@ -227,10 +279,6 @@ export default class Block1 extends React.Component {
   }
 
   renderProject(data) {
-    // ('SLIDER_TEXT', 'SLIDER_TEXT'),
-    // ('TEXT_SLIDER', 'TEXT_SLIDER'),
-    // ('IMAGE_SLIDER', 'IMAGE_SLIDER'),
-    // ('SLIDER_IMAGE', 'SLIDER_IMAGE'),
     if (data && data.info && _.isArray(data.blocks) && data.blocks.length) {
       return data.blocks.map((item, index) => {
         switch (item.type.toUpperCase()) {
@@ -248,6 +296,9 @@ export default class Block1 extends React.Component {
           case 'SLIDER_TEXT':
           case 'TEXT_SLIDER':
             return this.renderSliderText(data.info, item, index, item.type.toUpperCase());
+          case 'SLIDER_IMAGE':
+          case 'IMAGE_SLIDER':
+            return this.renderSliderImage(data.info, item, index, item.type.toUpperCase());
           default:
             return null;
         }
