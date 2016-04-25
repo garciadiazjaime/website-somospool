@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import _ from 'lodash';
 const style = require('./style.scss');
+import Carousel from '../../../../elements/carousel';
 
 export default class Block1 extends React.Component {
 
@@ -109,15 +110,15 @@ export default class Block1 extends React.Component {
   }
 
   renderImageImage(project, item, index) {
-    if (item && _.isArray(item.image_set) && item.image_set.length > 1) {
-      const imgUrl1 = item.image_set[0].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-      const imgUrl2 = item.image_set[1].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-      const images = [imgUrl1, imgUrl2];
-      const imagesEl = images.map((image, index2) => {
+    if (item && _.isArray(item.image_set) && item.image_set.length === 2) {
+      const imagesEl = item.image_set.map((image, index2) => {
         const imageId = index + '_' + index2;
+        const data = {
+          image_set: [image],
+        };
         return (<div className="col-sm-6 col-xs-12" key={index2}>
           <div className="row">
-            {this.getImageEl(project, item, imageId)}
+            {this.getImageEl(project, data, imageId)}
           </div>
         </div>);
       });
@@ -154,8 +155,38 @@ export default class Block1 extends React.Component {
     </div>);
   }
 
+  renderSlider(project, item, index) {
+    if (item && _.isArray(item.image_set) && item.image_set.length) {
+      const imagesEl = item.image_set.map((image, index2) => {
+        const imageId = index + '_' + index2;
+        const data = {
+          image_set: [image],
+        };
+        const className = index2 === 0 ? 'active' : '';
+        return (<div className={'item ' + className} key={index2}>
+          <div>
+            {this.getImageEl(project, data, imageId)}
+          </div>
+        </div>);
+      });
+      const carouselClasses = {
+        inner: style.inner,
+        controls: {
+          base: style.controls,
+          prev: style.prev,
+          next: style.next,
+        },
+      };
+      return (<div key={index}>
+          <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+            {imagesEl}
+          </Carousel>
+        </div>);
+    }
+    return null;
+  }
+
   renderProject(data) {
-    // ('SLIDER', 'SLIDER'),
     // ('SLIDER_TEXT', 'SLIDER_TEXT'),
     // ('TEXT_SLIDER', 'TEXT_SLIDER'),
     // ('IMAGE_SLIDER', 'IMAGE_SLIDER'),
@@ -172,6 +203,8 @@ export default class Block1 extends React.Component {
           case 'TEXT_IMAGE':
           case 'IMAGE_TEXT':
             return this.renderTextImage(data.info, item, index, item.type.toUpperCase());
+          case 'SLIDER':
+            return this.renderSlider(data.info, item, index);
           default:
             return null;
         }
