@@ -72,9 +72,7 @@ export default class Block1 extends React.Component {
         };
         const className = index2 === 0 ? 'active' : '';
         return (<div className={'item ' + className} key={index2}>
-          <div>
-            {this.getImageEl(project, data, imageId)}
-          </div>
+          {this.getImageEl(project, data, imageId)}
         </div>);
       });
     }
@@ -128,8 +126,8 @@ export default class Block1 extends React.Component {
   }
 
   renderImageImage(project, item, index) {
-    if (item && _.isArray(item.image_set) && item.image_set.length === 2) {
-      const imagesEl = item.image_set.map((image, index2) => {
+    if (item && _.isArray(item.image_set) && item.image_set.length) {
+      const imagesEl = item.image_set.slice(0, 2).map((image, index2) => {
         const imageId = index + '_' + index2;
         const data = {
           image_set: [image],
@@ -184,7 +182,7 @@ export default class Block1 extends React.Component {
       },
     };
     return (<div key={index}>
-        <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
           {sliderEl}
         </Carousel>
       </div>);
@@ -204,7 +202,7 @@ export default class Block1 extends React.Component {
     };
     if (type === 'SLIDER_TEXT') {
       content.push((<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
           {sliderEl}
         </Carousel>
       </div>), (<div className="col-xs-12 col-sm-6" key={2}>
@@ -214,7 +212,7 @@ export default class Block1 extends React.Component {
       content.push((<div className="col-xs-12 col-sm-6" key={2}>
         {textEl}
       </div>), (<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
           {sliderEl}
         </Carousel>
       </div>));
@@ -256,7 +254,7 @@ export default class Block1 extends React.Component {
     };
     if (type === 'SLIDER_IMAGE') {
       content.push((<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
           {sliderEl}
         </Carousel>
       </div>), (<div className="col-xs-12 col-sm-6" key={2}>
@@ -266,15 +264,13 @@ export default class Block1 extends React.Component {
       content.push((<div className="col-xs-12 col-sm-6" key={2}>
         {imageEl}
       </div>), (<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} indicators={false} classes={carouselClasses}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
           {sliderEl}
         </Carousel>
       </div>));
     }
-    return (<div className="container-fluid" key={index}>
-      <div clasName="row">
-        {content}
-      </div>
+    return (<div key={index}>
+      {content}
     </div>);
   }
 

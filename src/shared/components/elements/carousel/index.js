@@ -4,16 +4,18 @@ import _ from 'lodash';
 
 export default class Carousel extends React.Component {
 
-  getIndicators(data, flag) {
+  getIndicators(data, flag, sliderId) {
     // todo: implement based on bootsrap syntax
+    let indicators = [];
     if (flag !== false && _.isArray(data) && data.length) {
-      return data.map((item, index) => {
-        return (<div key={index}>
-          {item}
-        </div>);
+      indicators = data.map((item, index) => {
+        const className = index === 0 ? 'active' : '';
+        return (<li data-target={'#' + sliderId} data-slide-to={index} className={className} key={index} />);
       });
     }
-    return null;
+    return (<ol className="carousel-indicators">
+      {indicators}
+    </ol>);
   }
 
   getControls(flag, id, classes) {
@@ -35,7 +37,7 @@ export default class Carousel extends React.Component {
     const { id, interval, children, indicators, controls, classes } = this.props;
     return (<div id={id} className="carousel slide" data-ride="carousel" data-interval={interval || 5000}>
       <div className={'carousel-inner ' + (classes.inner || '')} role="listbox">
-        { this.getIndicators(children, indicators) }
+        { this.getIndicators(children, indicators, id) }
 
         {children}
 
