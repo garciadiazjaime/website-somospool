@@ -1,6 +1,7 @@
 @import '../../../../../theme/constants';
 .project{
   font-family: $fontA;
+  margin-top: 75px;
   .banner{
     position: relative;
     max-width: 100%;
@@ -41,7 +42,7 @@
     }
   }
   .description{
-    padding: 120px 0 175px;
+    padding: 0 15px 30px;
     color: $black;
     h2{
       font-family: $fontB;
@@ -54,6 +55,9 @@
       font-weight: 300;
       margin-bottom: 25px;
     }
+  }
+  .description_solo{
+    padding: 120px 0 175px;
   }
   img {
     width: 100%;
