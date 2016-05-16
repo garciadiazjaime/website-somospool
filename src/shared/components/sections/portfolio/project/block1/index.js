@@ -109,7 +109,7 @@ export default class Block1 extends React.Component {
   }
 
   renderImage(project, item, index) {
-    return (<div key={index}>
+    return (<div key={index} className="row">
       {this.getImageEl(project, item, index)}
     </div>);
   }
@@ -118,7 +118,7 @@ export default class Block1 extends React.Component {
     const textEl = this.getTextEl(item, index);
     return (<div className="container-fluid" key={index}>
       <div clasName="row">
-        <div className={'col-xs-12 col-sm-8 col-sm-offset-2 ' + style.description}>
+        <div className={'col-xs-12 col-sm-8 col-sm-offset-2 ' + style.description_solo}>
           {textEl}
         </div>
       </div>
@@ -155,11 +155,15 @@ export default class Block1 extends React.Component {
       content.push((<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
         {textEl}
       </div>), (<div className={'col-xs-12 col-sm-6'} key={2}>
-        {imageEl}
+        <div className="row">
+          {imageEl}
+        </div>
       </div>));
     } else {
       content.push((<div className={'col-xs-12 col-sm-6'} key={2}>
-        {imageEl}
+        <div className="row">
+          {imageEl}
+        </div>
       </div>), (<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
         {textEl}
       </div>));
@@ -181,7 +185,7 @@ export default class Block1 extends React.Component {
         next: style.next,
       },
     };
-    return (<div key={index}>
+    return (<div key={index} className="row">
         <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
           {sliderEl}
         </Carousel>
@@ -202,9 +206,11 @@ export default class Block1 extends React.Component {
     };
     if (type === 'SLIDER_TEXT') {
       content.push((<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
-          {sliderEl}
-        </Carousel>
+        <div className="row">
+          <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+            {sliderEl}
+          </Carousel>
+        </div>
       </div>), (<div className="col-xs-12 col-sm-6" key={2}>
         {textEl}
       </div>));
@@ -212,9 +218,11 @@ export default class Block1 extends React.Component {
       content.push((<div className="col-xs-12 col-sm-6" key={2}>
         {textEl}
       </div>), (<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
-          {sliderEl}
-        </Carousel>
+        <div className="row">
+          <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+            {sliderEl}
+          </Carousel>
+        </div>
       </div>));
     }
     return (<div key={index}>
@@ -254,19 +262,27 @@ export default class Block1 extends React.Component {
     };
     if (type === 'SLIDER_IMAGE') {
       content.push((<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
-          {sliderEl}
-        </Carousel>
+        <div className="row">
+          <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+            {sliderEl}
+          </Carousel>
+        </div>
       </div>), (<div className="col-xs-12 col-sm-6" key={2}>
-        {imageEl}
+        <div className="row">
+          {imageEl}
+        </div>
       </div>));
     } else {
       content.push((<div className="col-xs-12 col-sm-6" key={2}>
-        {imageEl}
+        <div className="row">
+          {imageEl}
+        </div>
       </div>), (<div className="col-xs-12 col-sm-6" key={1}>
-        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
-          {sliderEl}
-        </Carousel>
+        <div className="row">
+          <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+            {sliderEl}
+          </Carousel>
+        </div>
       </div>));
     }
     return (<div key={index}>
