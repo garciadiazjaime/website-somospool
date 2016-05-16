@@ -37,6 +37,7 @@ rhc env set DB_USER=value -a app
 rhc env set DB_PASSWORD=value -a app
 rhc env set DJANGO_SETTINGS_MODULE=settings.prod -a app
 rhc env set SENDGRID_API_KEY=value -a app
+rhc env set NPM_CONFIG_PRODUCTION="true" -a app
 
 Checking Envs
 rhc env list -a app

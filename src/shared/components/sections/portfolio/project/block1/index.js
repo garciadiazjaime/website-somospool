@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import _ from 'lodash';
 const style = require('./style.scss');
+import Carousel from '../../../../elements/carousel';
 
 export default class Block1 extends React.Component {
 
@@ -29,6 +30,53 @@ export default class Block1 extends React.Component {
       };
       img.src = url;
     });
+  }
+
+  getTextEl(item, index) {
+    if (item && item.text && item.text.length) {
+      const bits = item.text.split('\r\n');
+      if (bits.length > 1) {
+        return bits.map((text, index2) => {
+          if (index2 === 0) {
+            return (<h2 key={index2}>{text}</h2>);
+          } else if (text === '') {
+            return (<br />);
+          }
+          return (<p key={index2}>{text}</p>);
+        });
+      }
+    }
+    return (<p key={index}>
+      {item.text}
+    </p>);
+  }
+
+  getImageEl(project, item, index) {
+    if (item && _.isArray(item.image_set) && item.image_set.length) {
+      const imgUrl = item.image_set[0].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+      this.state.images.push({
+        url: imgUrl,
+        index,
+      });
+      return (<img src="/images/placeholder.png" alt={project.title} className={'img-responsive ' + style.imagePlaceholder } id={'image_' + index} />);
+    }
+    return null;
+  }
+
+  getSliderEl(project, item, index) {
+    if (item && _.isArray(item.image_set) && item.image_set.length) {
+      return item.image_set.map((image, index2) => {
+        const imageId = index + '_' + index2;
+        const data = {
+          image_set: [image],
+        };
+        const className = index2 === 0 ? 'active' : '';
+        return (<div className={'item ' + className} key={index2}>
+          {this.getImageEl(project, data, imageId)}
+        </div>);
+      });
+    }
+    return null;
   }
 
   shareFacebook() {
@@ -61,47 +109,169 @@ export default class Block1 extends React.Component {
   }
 
   renderImage(project, item, index) {
-    if (item && _.isArray(item.image_set) && item.image_set.length) {
-      const imgUrl = item.image_set[0].url.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-      this.state.images.push({
-        url: imgUrl,
-        index,
-      });
+    return (<div key={index}>
+      {this.getImageEl(project, item, index)}
+    </div>);
+  }
 
+  renderText(item, index) {
+    const textEl = this.getTextEl(item, index);
+    return (<div className="container-fluid" key={index}>
+      <div clasName="row">
+        <div className={'col-xs-12 col-sm-8 col-sm-offset-2 ' + style.description}>
+          {textEl}
+        </div>
+      </div>
+    </div>);
+  }
+
+  renderImageImage(project, item, index) {
+    if (item && _.isArray(item.image_set) && item.image_set.length) {
+      const imagesEl = item.image_set.slice(0, 2).map((image, index2) => {
+        const imageId = index + '_' + index2;
+        const data = {
+          image_set: [image],
+        };
+        return (<div className="col-sm-6 col-xs-12" key={index2}>
+          <div className="row">
+            {this.getImageEl(project, data, imageId)}
+          </div>
+        </div>);
+      });
       return (<div key={index}>
-          <img src="/images/landing.png" alt={project.title} className={'img-responsive ' + style.imagePlaceholder } id={'image_' + index} />
+          <div className="row">
+            {imagesEl}
+          </div>
         </div>);
     }
     return null;
   }
 
-  renderDescription(project, item, index) {
-    let response;
-    if (item && item.text && item.text.length) {
-      const bits = item.text.split('\r\n');
-      if (bits.length > 1) {
-        response = bits.map((text, index2) => {
-          if (index2 === 0) {
-            return (<h2 key={index2}>{text}</h2>);
-          } else if (text === '') {
-            return (<br />);
-          }
-          return (<p key={index2}>{text}</p>);
-        });
-      } else {
-        response = (<p key={index}>
-          {item.text}
-        </p>);
-      }
-      return (<div className="container-fluid" key={index}>
-        <div clasName="row">
-          <div className={'col-xs-12 col-sm-8 col-sm-offset-2 ' + style.description}>
-            {response}
-          </div>
-        </div>
-      </div>);
+  renderTextImage(project, item, index, type) {
+    const textEl = this.getTextEl(item, index);
+    const imageEl = this.getImageEl(project, item, index);
+    const content = [];
+    if (type === 'TEXT_IMAGE') {
+      content.push((<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
+        {textEl}
+      </div>), (<div className={'col-xs-12 col-sm-6'} key={2}>
+        {imageEl}
+      </div>));
+    } else {
+      content.push((<div className={'col-xs-12 col-sm-6'} key={2}>
+        {imageEl}
+      </div>), (<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
+        {textEl}
+      </div>));
     }
-    return null;
+    return (<div className="container-fluid" key={index}>
+      <div clasName="row">
+        {content}
+      </div>
+    </div>);
+  }
+
+  renderSlider(project, item, index) {
+    const sliderEl = this.getSliderEl(project, item, index);
+    const carouselClasses = {
+      inner: style.inner,
+      controls: {
+        base: style.controls,
+        prev: style.prev,
+        next: style.next,
+      },
+    };
+    return (<div key={index}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+          {sliderEl}
+        </Carousel>
+      </div>);
+  }
+
+  renderSliderText(project, item, index, type) {
+    const sliderEl = this.getSliderEl(project, item, index);
+    const textEl = this.getTextEl(item, index);
+    const content = [];
+    const carouselClasses = {
+      inner: style.inner,
+      controls: {
+        base: style.controls,
+        prev: style.prev,
+        next: style.next,
+      },
+    };
+    if (type === 'SLIDER_TEXT') {
+      content.push((<div className="col-xs-12 col-sm-6" key={1}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+          {sliderEl}
+        </Carousel>
+      </div>), (<div className="col-xs-12 col-sm-6" key={2}>
+        {textEl}
+      </div>));
+    } else {
+      content.push((<div className="col-xs-12 col-sm-6" key={2}>
+        {textEl}
+      </div>), (<div className="col-xs-12 col-sm-6" key={1}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+          {sliderEl}
+        </Carousel>
+      </div>));
+    }
+    return (<div key={index}>
+      {content}
+    </div>);
+  }
+
+  renderSliderImage(project, item, index, type) {
+    const images = _.clone(item.image_set);
+    let imageData = {};
+    let sliderData = {};
+    if (type === 'SLIDER_IMAGE') {
+      imageData = {
+        image_set: [images.pop()],
+      };
+      sliderData = {
+        image_set: images,
+      };
+    } else {
+      imageData = {
+        image_set: [images.shift()],
+      };
+      sliderData = {
+        image_set: images,
+      };
+    }
+    const sliderEl = this.getSliderEl(project, sliderData, index);
+    const imageEl = this.getImageEl(project, imageData, index);
+    const content = [];
+    const carouselClasses = {
+      inner: style.inner,
+      controls: {
+        base: style.controls,
+        prev: style.prev,
+        next: style.next,
+      },
+    };
+    if (type === 'SLIDER_IMAGE') {
+      content.push((<div className="col-xs-12 col-sm-6" key={1}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+          {sliderEl}
+        </Carousel>
+      </div>), (<div className="col-xs-12 col-sm-6" key={2}>
+        {imageEl}
+      </div>));
+    } else {
+      content.push((<div className="col-xs-12 col-sm-6" key={2}>
+        {imageEl}
+      </div>), (<div className="col-xs-12 col-sm-6" key={1}>
+        <Carousel id={'project_carousel_' + index} interval={8000} classes={carouselClasses}>
+          {sliderEl}
+        </Carousel>
+      </div>));
+    }
+    return (<div key={index}>
+      {content}
+    </div>);
   }
 
   renderProject(data) {
@@ -110,8 +280,21 @@ export default class Block1 extends React.Component {
         switch (item.type.toUpperCase()) {
           case 'IMAGE':
             return this.renderImage(data.info, item, index);
-          case 'DESCRIPTION':
-            return this.renderDescription(data.info, item, index);
+          case 'TEXT':
+            return this.renderText(item, index);
+          case 'IMAGE_IMAGE':
+            return this.renderImageImage(data.info, item, index);
+          case 'TEXT_IMAGE':
+          case 'IMAGE_TEXT':
+            return this.renderTextImage(data.info, item, index, item.type.toUpperCase());
+          case 'SLIDER':
+            return this.renderSlider(data.info, item, index);
+          case 'SLIDER_TEXT':
+          case 'TEXT_SLIDER':
+            return this.renderSliderText(data.info, item, index, item.type.toUpperCase());
+          case 'SLIDER_IMAGE':
+          case 'IMAGE_SLIDER':
+            return this.renderSliderImage(data.info, item, index, item.type.toUpperCase());
           default:
             return null;
         }
