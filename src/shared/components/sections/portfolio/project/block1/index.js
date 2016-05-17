@@ -168,11 +168,9 @@ export default class Block1 extends React.Component {
         {textEl}
       </div>));
     }
-    return (<div className="container-fluid" key={index}>
-      <div clasName="row">
+    return (<div clasName="row" key={index}>
         {content}
-      </div>
-    </div>);
+      </div>);
   }
 
   renderSlider(project, item, index) {
