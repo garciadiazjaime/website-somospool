@@ -152,9 +152,9 @@ export default class Block1 extends React.Component {
     const imageEl = this.getImageEl(project, item, index);
     const content = [];
     if (type === 'TEXT_IMAGE') {
-      content.push((<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
+      content.push((<div className={'col-xs-12 col-sm-4 col-sm-offset-1 ' + style.description} key={1}>
         {textEl}
-      </div>), (<div className={'col-xs-12 col-sm-6'} key={2}>
+      </div>), (<div className={'col-xs-12 col-sm-6 col-sm-offset-1'} key={2}>
         <div className="row">
           {imageEl}
         </div>
@@ -164,7 +164,7 @@ export default class Block1 extends React.Component {
         <div className="row">
           {imageEl}
         </div>
-      </div>), (<div className={'col-xs-12 col-sm-6 ' + style.description} key={1}>
+      </div>), (<div className={'col-xs-12 col-sm-4 col-sm-offset-1 ' + style.description} key={1}>
         {textEl}
       </div>));
     }
