@@ -32,12 +32,12 @@ export default class Block1 extends React.Component {
     });
   }
 
-  getTextEl(item, index) {
+  getTextEl(item, index, hideHeader) {
     if (item && item.text && item.text.length) {
       const bits = item.text.split('\r\n');
       if (bits.length > 1) {
         return bits.map((text, index2) => {
-          if (index2 === 0) {
+          if (index2 === 0 && hideHeader !== true) {
             return (<h2 key={index2}>{text}</h2>);
           } else if (text === '') {
             return (<br />);
@@ -106,6 +106,24 @@ export default class Block1 extends React.Component {
           rescursive(images);
         });
     }
+  }
+
+  renderIntro(project, item, index) {
+    const textEl = this.getTextEl(item, index, true);
+    return (<div key={index} className={style.banner}>
+      {this.getImageEl(project, item, index)}
+      <div className={style.legend}>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-xs-10 col-sm-6 col-xs-offset-1">
+              <h1>{textEl}</h1>
+              <h2>{project.title}</h2>
+              <h3>{project.subtitle}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>);
   }
 
   renderImage(project, item, index) {
@@ -294,6 +312,8 @@ export default class Block1 extends React.Component {
     if (data && data.info && _.isArray(data.blocks) && data.blocks.length) {
       return data.blocks.map((item, index) => {
         switch (item.type.toUpperCase()) {
+          case 'INTRO':
+            return this.renderIntro(data.info, item, index);
           case 'IMAGE':
             return this.renderImage(data.info, item, index);
           case 'TEXT':
